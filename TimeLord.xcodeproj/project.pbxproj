@@ -319,6 +319,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = TimeLord/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JonFir.TimeLord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -337,6 +338,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = TimeLord/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JonFir.TimeLord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -383,6 +385,7 @@
 				DC8B4A461C3EE0A7005D0B86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DC8B4A471C3EE0A7005D0B86 /* Build configuration list for PBXNativeTarget "TimeLordTests" */ = {
 			isa = XCConfigurationList;
@@ -391,6 +394,7 @@
 				DC8B4A491C3EE0A7005D0B86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
