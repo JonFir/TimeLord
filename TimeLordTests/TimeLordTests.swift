@@ -10,11 +10,6 @@ import XCTest
 @testable import TimeLord
 
 class TimeLordTests: XCTestCase {
-    let now = TimeLord(keyWord: .Now)
-    let todayFromKeyWord = TimeLord(keyWord: .Today)
-    let tomorrowFromKeyWord = TimeLord(keyWord: .Tomorrow)
-    let yesterdayFromKeyWord = TimeLord(keyWord: .Yesterday)
-    
     
     override func setUp() {
         super.setUp()
@@ -550,7 +545,103 @@ class TimeLordTests: XCTestCase {
         let tm2 = tm1.inTimeZone(NSTimeZone(abbreviation: "MSK")!)
         XCTAssertEqual(tm2.toString(), "2016-01-08 19:25:11")
     }
+    
+    func testStartOfDay(){
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nsDate = dateFormatter.dateFromString("2016-01-10 00:00:00")
+        let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).startOfDay()
+        XCTAssertEqual(nsDate, tmDate.rawDate)
+    }
+    
+    func testEndOfDay(){
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nsDate = dateFormatter.dateFromString("2016-01-10 23:59:59")
+        let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).endOfDay()
+        XCTAssertEqual(nsDate, tmDate.rawDate)
+    }
+    
+    func testStartOfMonth(){
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nsDate = dateFormatter.dateFromString("2016-01-01 00:00:00")
+        let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).startOfMonth()
+        XCTAssertEqual(nsDate, tmDate.rawDate)
+    }
+    
+    func testEndOfMonth(){
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nsDate = dateFormatter.dateFromString("2016-01-31 23:59:59")
+        let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).endOfMonth()
+        XCTAssertEqual(nsDate, tmDate.rawDate)
+    }
+    
+    func testStartOfYear(){
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nsDate = dateFormatter.dateFromString("2016-01-01 00:00:00")
+        let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).startOfYear()
+        XCTAssertEqual(nsDate, tmDate.rawDate)
+    }
+    
+    func testEndOfYear(){
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nsDate = dateFormatter.dateFromString("2016-12-31 23:59:59")
+        let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).endOfYear()
+        XCTAssertEqual(nsDate, tmDate.rawDate)
+    }
+    
+    func testNext(){
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nsDate = dateFormatter.dateFromString("2016-01-11 22:11:11")
+        let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).next()
+        XCTAssertEqual(nsDate, tmDate.rawDate)
+    }
 
+    func testPrevious(){
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nsDate = dateFormatter.dateFromString("2016-01-09 22:11:11")
+        let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).previous()
+        XCTAssertEqual(nsDate, tmDate.rawDate)
+    }
+    
+    func testAverage(){
+        let tm1 = TimeLord(year: 2016, month: 01, day: 01, hour: 02, minute: 30, second: 00)
+        let tm2 = TimeLord(year: 2016, month: 01, day: 02, hour: 10, minute: 30, second: 00)
+        let average1 = tm1.average(tm2)
+        let average2 = tm2.average(tm1)
+        XCTAssertEqual(average1.toString(), "2016-01-01 18:30:00")
+        XCTAssertEqual(average2.toString(), "2016-01-01 18:30:00")
+    }
+    
+    func testCompare(){
+        let tm1 = TimeLord(year: 2016, month: 01, day: 01, hour: 02, minute: 30, second: 00)
+        let tm2 = TimeLord(year: 2016, month: 01, day: 01, hour: 02, minute: 30, second: 00)
+        let tm3 = TimeLord(year: 2016, month: 01, day: 02, hour: 18, minute: 30, second: 45)
+        let tm4 = TimeLord(year: 2016, month: 01, day: 02, hour: 18, minute: 35, second: 45)
+        XCTAssertTrue(tm1 == tm2)
+        XCTAssertTrue(tm1 != tm3)
+        XCTAssertTrue(tm1 < tm3)
+        XCTAssertTrue(tm3 <= tm4)
+        XCTAssertTrue(tm1 <= tm2)
+        XCTAssertTrue(tm4 > tm3)
+        XCTAssertTrue(tm3 >= tm2)
+        XCTAssertTrue(tm1 >= tm2)
+        XCTAssertFalse(tm1 == tm3)
+        XCTAssertFalse(tm1 != tm2)
+        XCTAssertFalse(tm1 < tm2)
+        XCTAssertFalse(tm4 < tm2)
+        XCTAssertFalse(tm4 <= tm2)
+        XCTAssertFalse(tm1 > tm3)
+        XCTAssertFalse(tm1 > tm2)
+        XCTAssertFalse(tm1 >= tm4)
+    }
+    
     
     
     

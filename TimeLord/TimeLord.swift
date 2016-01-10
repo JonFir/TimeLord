@@ -536,13 +536,11 @@ public struct TimeLord {
     }
     
     func next() -> TimeLord{
-        let nextDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: self.rawDate, options: [])!
-        return TimeLord(date: NSCalendar.currentCalendar().startOfDayForDate(nextDate))
+        return self.addDays(1)!
     }
     
     func previous() -> TimeLord{
-        let nextDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: self.rawDate, options: [])!
-        return TimeLord(date: NSCalendar.currentCalendar().startOfDayForDate(nextDate))
+        return self.subDays(1)!
     }
     
     func average(date: TimeLord) -> TimeLord
