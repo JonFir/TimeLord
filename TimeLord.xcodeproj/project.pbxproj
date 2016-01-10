@@ -10,6 +10,7 @@
 		DC8B4A341C3EE0A7005D0B86 /* TimeLord.h in Headers */ = {isa = PBXBuildFile; fileRef = DC8B4A331C3EE0A7005D0B86 /* TimeLord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC8B4A3B1C3EE0A7005D0B86 /* TimeLord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8B4A301C3EE0A7005D0B86 /* TimeLord.framework */; };
 		DC8B4A401C3EE0A7005D0B86 /* TimeLordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B4A3F1C3EE0A7005D0B86 /* TimeLordTests.swift */; };
+		DC8B4A4B1C3EE0C4005D0B86 /* TimeLord.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8B4A4A1C3EE0C4005D0B86 /* TimeLord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		DC8B4A3A1C3EE0A7005D0B86 /* TimeLordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeLordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC8B4A3F1C3EE0A7005D0B86 /* TimeLordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLordTests.swift; sourceTree = "<group>"; };
 		DC8B4A411C3EE0A7005D0B86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC8B4A4A1C3EE0C4005D0B86 /* TimeLord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 		DC8B4A321C3EE0A7005D0B86 /* TimeLord */ = {
 			isa = PBXGroup;
 			children = (
+				DC8B4A4A1C3EE0C4005D0B86 /* TimeLord.swift */,
 				DC8B4A331C3EE0A7005D0B86 /* TimeLord.h */,
 				DC8B4A351C3EE0A7005D0B86 /* Info.plist */,
 			);
@@ -194,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC8B4A4B1C3EE0C4005D0B86 /* TimeLord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +312,7 @@
 		DC8B4A451C3EE0A7005D0B86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -318,12 +323,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = JonFir.TimeLord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		DC8B4A461C3EE0A7005D0B86 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
