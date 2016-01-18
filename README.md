@@ -12,6 +12,7 @@ Is simple structure encapsulating NSDate, NSCalendar, NSDateComponents, NSDateFo
     - [Compare dates](#compare-dates)
     - [Modify date](#modify-date)
     - [Get difference between date](#get-difference-between-date)
+- [License](#license)
 
 ## Features
 
@@ -253,3 +254,10 @@ let newDate = firstDate.diffInMinutes(secondDate)
 
 let newDate = firstDate.diffInSeconds(secondDate)
 ```
+
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Evgeny Elchev
