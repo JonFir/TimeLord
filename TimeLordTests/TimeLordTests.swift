@@ -642,6 +642,14 @@ class TimeLordTests: XCTestCase {
         XCTAssertFalse(tm1 >= tm4)
     }
     
+    func testHashable(){
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nsDate = dateFormatter.dateFromString("2016-01-09 22:11:11")
+        let tmDate = TimeLord(year: 2016, month: 01, day: 09, hour: 22, minute: 11, second: 11)
+        XCTAssertEqual(nsDate!.hashValue, tmDate.hashValue)
+    }
+    
     
     
     

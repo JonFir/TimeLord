@@ -9,7 +9,7 @@
 import Foundation
 
 
-public struct TimeLord {
+public struct TimeLord : Hashable, Equatable {
     
     private var nsDate: NSDate
     public var rawDate: NSDate{
@@ -20,6 +20,12 @@ public struct TimeLord {
     
     public static let toStringFormat = "yyyy-MM-dd HH:mm:ss"
     public var defaultTimeZone: NSTimeZone = NSTimeZone.systemTimeZone()
+    
+    public var hashValue : Int{
+        get{
+            return self.nsDate.hashValue
+        }
+    }
     
     public var era: Int{
         get{
