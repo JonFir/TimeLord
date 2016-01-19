@@ -9,7 +9,7 @@
 import Foundation
 
 
-public struct TimeLord : Hashable, Equatable {
+public struct TimeLord : Hashable, Equatable, Comparable {
     
     private var nsDate: NSDate
     public var rawDate: NSDate{
