@@ -388,9 +388,9 @@ public struct TimeLord : Hashable, Equatable, Comparable {
     
     /* ADDITIONS AND SUBTRACTION */
     
-    private func changeTimeInterval(timeInterval: DateUnit, value: UInt, modyfer: Int) -> TimeLord? {
+    private func changeTimeInterval(timeInterval: DateUnit, value: Int, modyfer: Int) -> TimeLord? {
         
-        let modyfedValue = Int(value) * modyfer
+        let modyfedValue = value * modyfer
         
         let dateComponent = NSDateComponents()
         
@@ -420,51 +420,51 @@ public struct TimeLord : Hashable, Equatable, Comparable {
         return TimeLord(date: newDate)
     }
     
-    public func addYears(years: UInt) -> TimeLord?{
+    public func addYears(years: Int) -> TimeLord?{
         return self.changeTimeInterval(.Year, value: years, modyfer: 1)
     }
     
-    public func subYears(years: UInt) -> TimeLord?{
+    public func subYears(years: Int) -> TimeLord?{
         return self.changeTimeInterval(.Year, value: years, modyfer: -1)
     }
     
-    public func addMonths(months: UInt) -> TimeLord?{
+    public func addMonths(months: Int) -> TimeLord?{
         return self.changeTimeInterval(.Month, value: months, modyfer: 1)
     }
     
-    public func subMonths(months: UInt) -> TimeLord?{
+    public func subMonths(months: Int) -> TimeLord?{
         return self.changeTimeInterval(.Month, value: months, modyfer: -1)
     }
     
-    public func addDays(days: UInt) -> TimeLord?{
+    public func addDays(days: Int) -> TimeLord?{
         return self.changeTimeInterval(.Day, value: days, modyfer: 1)
     }
     
-    public func subDays(days: UInt) -> TimeLord?{
+    public func subDays(days: Int) -> TimeLord?{
         return self.changeTimeInterval(.Day, value: days, modyfer: -1)
     }
     
-    public func addHours(hours: UInt) -> TimeLord?{
+    public func addHours(hours: Int) -> TimeLord?{
         return self.changeTimeInterval(.Hour, value: hours, modyfer: 1)
     }
     
-    public func subHours(hours: UInt) -> TimeLord?{
+    public func subHours(hours: Int) -> TimeLord?{
         return self.changeTimeInterval(.Hour, value: hours, modyfer: -1)
     }
     
-    public func addMinutes(minutes: UInt) -> TimeLord?{
+    public func addMinutes(minutes: Int) -> TimeLord?{
         return self.changeTimeInterval(.Minute, value: minutes, modyfer: 1)
     }
     
-    public func subMinutes(minutes: UInt) -> TimeLord?{
+    public func subMinutes(minutes: Int) -> TimeLord?{
         return self.changeTimeInterval(.Minute, value: minutes, modyfer: -1)
     }
     
-    public func addSeconds(seconds: UInt) -> TimeLord?{
+    public func addSeconds(seconds: Int) -> TimeLord?{
         return self.changeTimeInterval(.Second, value: seconds, modyfer: 1)
     }
     
-    public func subSeconds(seconds: UInt) -> TimeLord?{
+    public func subSeconds(seconds: Int) -> TimeLord?{
         return self.changeTimeInterval(.Second, value: seconds, modyfer: -1)
     }
     
@@ -552,7 +552,7 @@ public struct TimeLord : Hashable, Equatable, Comparable {
     public func average(date: TimeLord) -> TimeLord
     {
         let seconds = self.diffInSeconds(date, absoluteValue: false) / 2
-        return seconds > 0 ? self.addSeconds(UInt(abs(seconds)))! : self.subSeconds(UInt(abs(seconds)))!
+        return self.addSeconds(seconds)!
     }
 }
 

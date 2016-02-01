@@ -461,9 +461,9 @@ class TimeLordTests: XCTestCase {
     
     func testAddMinutes(){
         let tm1 = TimeLord(year: 2016, month: 01, day: 08, hour: 23, minute: 25, second: 11)
-        let tm2 = TimeLord(year: 2016, month: 01, day: 08, hour: 23, minute: 26, second: 11)
+        let tm2 = TimeLord(year: 2016, month: 01, day: 09, hour: 00, minute: 05, second: 11)
         let tm3 = TimeLord(year: 2016, month: 01, day: 08, hour: 23, minute: 40, second: 11)
-        XCTAssertEqual( tm1.addMinutes(1)?.rawDate, tm2.rawDate )
+        XCTAssertEqual( tm1.addMinutes(40)?.rawDate, tm2.rawDate )
         XCTAssertEqual( tm1.addMinutes(15)?.rawDate, tm3.rawDate )
     }
     
