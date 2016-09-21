@@ -133,6 +133,8 @@ extension Date {
         if let timeZone = timeZone{
             (dateComponents as NSDateComponents).timeZone = timeZone
         }
+        
+        dateComponents.timeZone = timeZone
 
         return Calendar.current.date(from: dateComponents)
     }
