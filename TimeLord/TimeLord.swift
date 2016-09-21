@@ -11,15 +11,15 @@ import Foundation
 
 public struct TimeLord : Hashable, Equatable, Comparable {
     
-    private var nsDate: NSDate
-    public var rawDate: NSDate{
+    fileprivate var nsDate: Date
+    public var rawDate: Date{
         get{
             return self.nsDate
         }
     }
     
     public static let toStringFormat = "yyyy-MM-dd HH:mm:ss"
-    public var defaultTimeZone: NSTimeZone = NSTimeZone.systemTimeZone()
+    public var defaultTimeZone: TimeZone = TimeZone.current
     
     public var hashValue : Int{
         get{
@@ -29,98 +29,98 @@ public struct TimeLord : Hashable, Equatable, Comparable {
     
     public var era: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.era
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.era!
         }
     }
     public var year: Int
         {
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.year
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.year!
         }
     }
     public var month: Int
         {
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.month
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.month!
         }
     }
     public var day: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.day
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.day!
         }
     }
     public var dayInMonth: Int{
         get{
-            return NSCalendar.currentCalendar().rangeOfUnit(.Day, inUnit: .Month, forDate: self.rawDate).length
+            return (Calendar.current as NSCalendar).range(of: .day, in: .month, for: self.rawDate).length
         }
     }
     public var hour: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.hour
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.hour!
         }
     }
     public var minute: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.minute
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.minute!
         }
     }
     public var second: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.second
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.second!
         }
     }
     public var nanosecond: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.nanosecond
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.nanosecond!
         }
     }
     public var weekday: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.weekday
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.weekday!
         }
     }
     public var weekdaySymbol: String{
         get{
-            return NSCalendar.currentCalendar().weekdaySymbols[self.weekday - 1]
+            return Calendar.current.weekdaySymbols[self.weekday - 1]
         }
     }
     public var weekdayOrdinal: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.weekdayOrdinal
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.weekdayOrdinal!
         }
     }
     public var quarter: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.quarter
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.quarter!
         }
     }
     public var weekOfMonth: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.weekOfMonth
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.weekOfMonth!
         }
     }
     public var weekOfYear: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.weekOfYear
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.weekOfYear!
         }
     }
     public var yearForWeekOfYear: Int{
         get{
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: self.rawDate)
-            return dateComponents.yearForWeekOfYear
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit(rawValue: UInt.max), from: self.rawDate)
+            return dateComponents.yearForWeekOfYear!
         }
     }
 
@@ -131,9 +131,9 @@ public struct TimeLord : Hashable, Equatable, Comparable {
         hour: Int,
         minute: Int,
         second: Int,
-        timeZone: NSTimeZone? = nil
+        timeZone: TimeZone? = nil
     ){
-        let dateComponents = NSDateComponents()
+        var dateComponents = DateComponents()
         dateComponents.year = year
         dateComponents.month = month
         dateComponents.day = day
@@ -141,29 +141,31 @@ public struct TimeLord : Hashable, Equatable, Comparable {
         dateComponents.minute = minute
         dateComponents.second = second
         
+        
         if let timeZone = timeZone{
             self.defaultTimeZone = timeZone
-            dateComponents.timeZone = timeZone
+            (dateComponents as NSDateComponents).timeZone = timeZone
         }
+        dateComponents.timeZone = timeZone
 
-        self.nsDate = NSCalendar.currentCalendar().dateFromComponents(dateComponents)!
+        self.nsDate = Calendar.current.date(from: dateComponents)!
     }
     
-    public init?(date: String, inFormat: String? = nil, timeZone: NSTimeZone? = nil){
-        let dateFormater = NSDateFormatter()
+    public init?(date: String, inFormat: String? = nil, timeZone: TimeZone? = nil){
+        let dateFormater = DateFormatter()
         dateFormater.dateFormat = inFormat ?? TimeLord.toStringFormat
         if let timeZone = timeZone {
             self.defaultTimeZone = timeZone
             dateFormater.timeZone = timeZone
         }
         
-        guard let nsDate = dateFormater.dateFromString(date) else{
+        guard let nsDate = dateFormater.date(from: date) else{
             return nil
         }
         self.nsDate = nsDate
     }
     
-    public init(date: NSDate, timeZone: NSTimeZone? = nil){
+    public init(date: Date, timeZone: TimeZone? = nil){
         self.nsDate = date
         if let timeZone = timeZone{
             self.defaultTimeZone = timeZone
@@ -171,62 +173,62 @@ public struct TimeLord : Hashable, Equatable, Comparable {
     }
     
     public init(timeIntervalSince1970: Double){
-        self.nsDate = NSDate(timeIntervalSince1970: NSTimeInterval(timeIntervalSince1970))
+        self.nsDate = Date(timeIntervalSince1970: TimeInterval(timeIntervalSince1970))
     }
     
     public init(timeIntervalSinceNow: Double){
-        self.nsDate = NSDate(timeIntervalSinceNow: NSTimeInterval(timeIntervalSinceNow))
+        self.nsDate = Date(timeIntervalSinceNow: TimeInterval(timeIntervalSinceNow))
     }
     
-    public init(timeInterval: Double,  sinceDate: NSDate){
-        self.nsDate = NSDate(timeInterval: timeInterval, sinceDate: sinceDate)
+    public init(timeInterval: Double,  sinceDate: Date){
+        self.nsDate = Date(timeInterval: timeInterval, since: sinceDate)
     }
     
     
-    public init(timeIntervalSinceReferenceDate: NSTimeInterval){
-        self.nsDate = NSDate(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
+    public init(timeIntervalSinceReferenceDate: TimeInterval){
+        self.nsDate = Date(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
     }
 
     
     public init(keyWord: DateKeyWord){
         switch keyWord {
-        case .Now:
-            self.nsDate = NSDate()
-        case .Today:
-            self.nsDate = TimeLord(keyWord: .Now).startOfDay().rawDate
-        case .Tomorrow:
-            self.nsDate = TimeLord(keyWord: .Today).addDays(1)!.rawDate
-        case .Yesterday:
-            self.nsDate = TimeLord(keyWord: .Today).subDays(1)!.rawDate
+        case .now:
+            self.nsDate = Date()
+        case .today:
+            self.nsDate = TimeLord(keyWord: .now).startOfDay().rawDate
+        case .tomorrow:
+            self.nsDate = TimeLord(keyWord: .today).addDays(1)!.rawDate
+        case .yesterday:
+            self.nsDate = TimeLord(keyWord: .today).subDays(1)!.rawDate
         }
     }
     
     public enum DateUnit{
-        case Era
-        case Year
-        case Month
-        case Day
-        case Hour
-        case Minute
-        case Second
-        case Nanosecond
-        case Weekday
-        case WeekdayOrdinal
-        case Quarter
-        case WeekOfMonth
-        case WeekOfYear
-        case YearForWeekOfYear
+        case era
+        case year
+        case month
+        case day
+        case hour
+        case minute
+        case second
+        case nanosecond
+        case weekday
+        case weekdayOrdinal
+        case quarter
+        case weekOfMonth
+        case weekOfYear
+        case yearForWeekOfYear
     }
     
     public enum DateKeyWord{
-        case Now
-        case Today
-        case Tomorrow
-        case Yesterday
+        case now
+        case today
+        case tomorrow
+        case yesterday
     }
     
-    public func toStringInFormat(format: String, inTimeZone: NSTimeZone? = nil) -> String{
-        let dateformater = NSDateFormatter()
+    public func toStringInFormat(_ format: String, inTimeZone: TimeZone? = nil) -> String{
+        let dateformater = DateFormatter()
         dateformater.dateFormat = format
         
         if let timeZone = inTimeZone {
@@ -235,70 +237,70 @@ public struct TimeLord : Hashable, Equatable, Comparable {
             dateformater.timeZone = self.defaultTimeZone
         }
         
-        return dateformater.stringFromDate(self.nsDate)
+        return dateformater.string(from: self.nsDate)
     }
     
-    public func toString(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toString(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat(TimeLord.toStringFormat, inTimeZone: inTimeZone)
     }
     
-    public func toFormattedDateString(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toFormattedDateString(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("MMM d, YYYY", inTimeZone: inTimeZone)
     }
     
-    public func toTimeString(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toTimeString(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("HH:mm:ss", inTimeZone: inTimeZone)
     }
     
-    public func toDateTimeString(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toDateTimeString(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("yyyy-MM-dd HH:mm:ss", inTimeZone: inTimeZone)
     }
     
-    public func toDayDateTimeString(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toDayDateTimeString(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("E, MMM d, YYYY h:mm a", inTimeZone: inTimeZone)
     }
     
-    public func toIso8601String(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toIso8601String(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("yyyy-MM-dd'T'HH:mm:ssZ", inTimeZone: inTimeZone)
     }
     
-    public func toRfc850String(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toRfc850String(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("EEEE',' dd'-'MMM'-'yy HH':'mm':'ss z", inTimeZone: inTimeZone)
     }
     
-    public func toRfc1123String(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toRfc1123String(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("EEE',' dd MMM yyyy HH':'mm':'ss ZZZ", inTimeZone: inTimeZone)
     }
     
-    public func toRfc2822String(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toRfc2822String(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("EEE',' dd MMM yyyy HH':'mm':'ss ZZZ", inTimeZone: inTimeZone)
     }
     
-    public func toRfc3339String(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toRfc3339String(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ", inTimeZone: inTimeZone)
     }
     
-    public func toRssString(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toRssString(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("EEE',' dd MMM yyyy HH':'mm':'ss ZZZ", inTimeZone: inTimeZone)
     }
     
-    public func toW3cString(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toW3cString(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ", inTimeZone: inTimeZone)
     }
     
-    public func toRfc1036String(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toRfc1036String(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("EEE',' dd MMM yy HH':'mm':'ss ZZZ", inTimeZone: inTimeZone)
     }
     
-    public func toRfc822String(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toRfc822String(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("EEE',' dd MMM yy HH':'mm':'ss ZZZ", inTimeZone: inTimeZone)
     }
     
-    public func toAtomString(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toAtomString(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ", inTimeZone: inTimeZone)
     }
     
-    public func toCookieString(inTimeZone: NSTimeZone? = nil) -> String{
+    public func toCookieString(_ inTimeZone: TimeZone? = nil) -> String{
         return self.toStringInFormat("EEEE',' dd'-'MMM'-'yyyy HH':'mm':'ss z", inTimeZone: inTimeZone)
     }
     
@@ -306,56 +308,56 @@ public struct TimeLord : Hashable, Equatable, Comparable {
     
     
     
-    public func between (first: TimeLord, second: TimeLord) -> Bool{
+    public func between (_ first: TimeLord, second: TimeLord) -> Bool{
         return (first < self) && (self < second )
     }
     
-    public func closest(first: TimeLord, second: TimeLord) -> TimeLord{
+    public func closest(_ first: TimeLord, second: TimeLord) -> TimeLord{
         return self.diffInSeconds(first) < self.diffInSeconds(second)  ? first : second
     }
     
-    public func farthest(first: TimeLord, second: TimeLord) -> TimeLord{
+    public func farthest(_ first: TimeLord, second: TimeLord) -> TimeLord{
         return self.diffInSeconds(first) > self.diffInSeconds(second)  ? first : second
     }
     
-    public func earlier(date: TimeLord) -> TimeLord{
-        return TimeLord(date: self.rawDate.earlierDate(date.rawDate))
+    public func earlier(_ date: TimeLord) -> TimeLord{
+        return TimeLord(date: (self.rawDate as NSDate).earlierDate(date.rawDate))
     }
     
-    public func later(date: TimeLord) -> TimeLord{
-        return TimeLord(date: self.rawDate.laterDate(date.rawDate))
+    public func later(_ date: TimeLord) -> TimeLord{
+        return TimeLord(date: (self.rawDate as NSDate).laterDate(date.rawDate))
     }
     
     public func isWeekend() -> Bool{
-        return NSCalendar.currentCalendar().isDateInWeekend(self.rawDate)
+        return Calendar.current.isDateInWeekend(self.rawDate)
     }
     
     public func isYesterday() -> Bool{
-        return NSCalendar.currentCalendar().isDateInYesterday(self.rawDate)
+        return Calendar.current.isDateInYesterday(self.rawDate)
     }
     
     public func isToday() -> Bool{
-        return NSCalendar.currentCalendar().isDateInToday(self.rawDate)
+        return Calendar.current.isDateInToday(self.rawDate)
     }
     
     public func isTomorrow() -> Bool{
-        return NSCalendar.currentCalendar().isDateInTomorrow(self.rawDate)
+        return Calendar.current.isDateInTomorrow(self.rawDate)
     }
     
     public func isFuture() -> Bool{
-        return self > TimeLord(keyWord: .Now)
+        return self > TimeLord(keyWord: .now)
     }
     
     public func isPast() -> Bool{
-        return self < TimeLord(keyWord: .Now)
+        return self < TimeLord(keyWord: .now)
     }
     
     public func isLeapYear() -> Bool{
         return (( self.year%100 != 0) && (self.year%4 == 0)) || (self.year%400 == 0);
     }
     
-    public func isSameDay(date: TimeLord) -> Bool{
-        return NSCalendar.currentCalendar().isDate(self.rawDate, inSameDayAsDate: date.rawDate)
+    public func isSameDay(_ date: TimeLord) -> Bool{
+        return Calendar.current.isDate(self.rawDate, inSameDayAs: date.rawDate)
     }
     
     public func isSunday() -> Bool{
@@ -388,140 +390,140 @@ public struct TimeLord : Hashable, Equatable, Comparable {
     
     /* ADDITIONS AND SUBTRACTION */
     
-    private func changeTimeInterval(timeInterval: DateUnit, value: Int, modyfer: Int) -> TimeLord? {
+    fileprivate func changeTimeInterval(_ timeInterval: DateUnit, value: Int, modyfer: Int) -> TimeLord? {
         
         let modyfedValue = value * modyfer
         
-        let dateComponent = NSDateComponents()
+        var dateComponent = DateComponents()
         
         switch timeInterval {
-        case .Second:
+        case .second:
             dateComponent.second = modyfedValue
-        case .Minute:
+        case .minute:
             dateComponent.minute = modyfedValue
-        case .Hour:
+        case .hour:
             dateComponent.hour = modyfedValue
-        case .Day:
+        case .day:
             dateComponent.day = modyfedValue
-        case .WeekOfMonth:
+        case .weekOfMonth:
             dateComponent.day = modyfedValue * 7
-        case .Month:
+        case .month:
             dateComponent.month = modyfedValue
-        case .Year:
+        case .year:
             dateComponent.year = modyfedValue
         default:
             return nil
         }
         
-        let calendar = NSCalendar.currentCalendar()
-        guard let newDate = calendar.dateByAddingComponents(dateComponent, toDate: self.rawDate, options: .MatchFirst) else{
+        let calendar = Calendar.current
+        guard let newDate = (calendar as NSCalendar).date(byAdding: dateComponent, to: self.rawDate, options: .matchFirst) else{
             return nil
         }
         return TimeLord(date: newDate)
     }
     
-    public func addYears(years: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Year, value: years, modyfer: 1)
+    public func addYears(_ years: Int) -> TimeLord?{
+        return self.changeTimeInterval(.year, value: years, modyfer: 1)
     }
     
-    public func subYears(years: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Year, value: years, modyfer: -1)
+    public func subYears(_ years: Int) -> TimeLord?{
+        return self.changeTimeInterval(.year, value: years, modyfer: -1)
     }
     
-    public func addMonths(months: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Month, value: months, modyfer: 1)
+    public func addMonths(_ months: Int) -> TimeLord?{
+        return self.changeTimeInterval(.month, value: months, modyfer: 1)
     }
     
-    public func subMonths(months: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Month, value: months, modyfer: -1)
+    public func subMonths(_ months: Int) -> TimeLord?{
+        return self.changeTimeInterval(.month, value: months, modyfer: -1)
     }
     
-    public func addDays(days: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Day, value: days, modyfer: 1)
+    public func addDays(_ days: Int) -> TimeLord?{
+        return self.changeTimeInterval(.day, value: days, modyfer: 1)
     }
     
-    public func subDays(days: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Day, value: days, modyfer: -1)
+    public func subDays(_ days: Int) -> TimeLord?{
+        return self.changeTimeInterval(.day, value: days, modyfer: -1)
     }
     
-    public func addHours(hours: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Hour, value: hours, modyfer: 1)
+    public func addHours(_ hours: Int) -> TimeLord?{
+        return self.changeTimeInterval(.hour, value: hours, modyfer: 1)
     }
     
-    public func subHours(hours: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Hour, value: hours, modyfer: -1)
+    public func subHours(_ hours: Int) -> TimeLord?{
+        return self.changeTimeInterval(.hour, value: hours, modyfer: -1)
     }
     
-    public func addMinutes(minutes: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Minute, value: minutes, modyfer: 1)
+    public func addMinutes(_ minutes: Int) -> TimeLord?{
+        return self.changeTimeInterval(.minute, value: minutes, modyfer: 1)
     }
     
-    public func subMinutes(minutes: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Minute, value: minutes, modyfer: -1)
+    public func subMinutes(_ minutes: Int) -> TimeLord?{
+        return self.changeTimeInterval(.minute, value: minutes, modyfer: -1)
     }
     
-    public func addSeconds(seconds: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Second, value: seconds, modyfer: 1)
+    public func addSeconds(_ seconds: Int) -> TimeLord?{
+        return self.changeTimeInterval(.second, value: seconds, modyfer: 1)
     }
     
-    public func subSeconds(seconds: Int) -> TimeLord?{
-        return self.changeTimeInterval(.Second, value: seconds, modyfer: -1)
+    public func subSeconds(_ seconds: Int) -> TimeLord?{
+        return self.changeTimeInterval(.second, value: seconds, modyfer: -1)
     }
     
     
     /*  DIFFERENCES */
     
-    public func diffInYears(fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
-        let years = NSCalendar.currentCalendar().components(NSCalendarUnit.Year, fromDate: self.rawDate, toDate: fromDate.rawDate, options: []).year
-        return absoluteValue ? abs(years) : years
+    public func diffInYears(_ fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
+        let years = (Calendar.current as NSCalendar).components(NSCalendar.Unit.year, from: self.rawDate, to: fromDate.rawDate, options: []).year
+        return absoluteValue ? abs(years!) : years!
     }
 
-    public func diffInMonths(fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
-        let months = NSCalendar.currentCalendar().components(NSCalendarUnit.Month, fromDate: self.rawDate, toDate: fromDate.rawDate, options: []).month
-        return absoluteValue ? abs(months) : months
+    public func diffInMonths(_ fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
+        let months = (Calendar.current as NSCalendar).components(NSCalendar.Unit.month, from: self.rawDate, to: fromDate.rawDate, options: []).month
+        return absoluteValue ? abs(months!) : months!
     }
     
-    public func diffInWeeks(fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
-        let days = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: self.rawDate, toDate: fromDate.rawDate, options: []).day
-        let weeks = days/7
+    public func diffInWeeks(_ fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
+        let days = (Calendar.current as NSCalendar).components(NSCalendar.Unit.day, from: self.rawDate, to: fromDate.rawDate, options: []).day
+        let weeks = days!/7
         return absoluteValue ? abs(weeks) : weeks
     }
     
-    public func diffInDays(fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
-        let days = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: self.rawDate, toDate: fromDate.rawDate, options: []).day
-        return absoluteValue ? abs(days) : days
+    public func diffInDays(_ fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
+        let days = (Calendar.current as NSCalendar).components(NSCalendar.Unit.day, from: self.rawDate, to: fromDate.rawDate, options: []).day
+        return absoluteValue ? abs(days!) : days!
     }
     
-    public func diffInHours(fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
-        let hours = NSCalendar.currentCalendar().components(NSCalendarUnit.Hour, fromDate: self.rawDate, toDate: fromDate.rawDate, options: []).hour
-        return absoluteValue ? abs(hours) : hours
+    public func diffInHours(_ fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
+        let hours = (Calendar.current as NSCalendar).components(NSCalendar.Unit.hour, from: self.rawDate, to: fromDate.rawDate, options: []).hour
+        return absoluteValue ? abs(hours!) : hours!
     }
     
-    public func diffInMinutes(fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
-        let minutes = NSCalendar.currentCalendar().components(NSCalendarUnit.Minute, fromDate: self.rawDate, toDate: fromDate.rawDate, options: []).minute
-        return absoluteValue ? abs(minutes) : minutes
+    public func diffInMinutes(_ fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
+        let minutes = (Calendar.current as NSCalendar).components(NSCalendar.Unit.minute, from: self.rawDate, to: fromDate.rawDate, options: []).minute
+        return absoluteValue ? abs(minutes!) : minutes!
     }
     
-    public func diffInSeconds(fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
-        let seconds = NSCalendar.currentCalendar().components(NSCalendarUnit.Second, fromDate: self.rawDate, toDate: fromDate.rawDate, options: []).second
-        return absoluteValue ? abs(seconds) : seconds
+    public func diffInSeconds(_ fromDate: TimeLord, absoluteValue: Bool = true) -> Int{
+        let seconds = (Calendar.current as NSCalendar).components(NSCalendar.Unit.second, from: self.rawDate, to: fromDate.rawDate, options: []).second
+        return absoluteValue ? abs(seconds!) : seconds!
     }
     
     /* MODIFIERS */
     
-    public func inTimeZone(timeZone: NSTimeZone) -> TimeLord{
+    public func inTimeZone(_ timeZone: TimeZone) -> TimeLord{
         return TimeLord(date: self.rawDate, timeZone: timeZone)
     }
     
     public func startOfDay() -> TimeLord{
-        return TimeLord(date: NSCalendar.currentCalendar().startOfDayForDate(self.rawDate))
+        return TimeLord(date: Calendar.current.startOfDay(for: self.rawDate))
     }
     
     public func endOfDay() -> TimeLord{
-        let components = NSDateComponents()
+        var components = DateComponents()
         components.day = 1
         components.second = -1
-        let endOfDay = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: self.startOfDay().rawDate, options: [])
+        let endOfDay = (Calendar.current as NSCalendar).date(byAdding: components, to: self.startOfDay().rawDate, options: [])
         return TimeLord(date: endOfDay!)
     }
     
@@ -549,7 +551,7 @@ public struct TimeLord : Hashable, Equatable, Comparable {
         return self.subDays(1)!
     }
     
-    public func average(date: TimeLord) -> TimeLord
+    public func average(_ date: TimeLord) -> TimeLord
     {
         let seconds = self.diffInSeconds(date, absoluteValue: false) / 2
         return self.addSeconds(seconds)!
@@ -557,7 +559,7 @@ public struct TimeLord : Hashable, Equatable, Comparable {
 }
 
 public func ==(left: TimeLord, right: TimeLord) -> Bool {
-    return left.rawDate.compare(right.rawDate) == NSComparisonResult.OrderedSame
+    return left.rawDate.compare(right.rawDate) == ComparisonResult.orderedSame
 }
 
 public func !=(left: TimeLord, right: TimeLord) -> Bool {
@@ -565,11 +567,11 @@ public func !=(left: TimeLord, right: TimeLord) -> Bool {
 }
 
 public func <(left: TimeLord, right: TimeLord) -> Bool {
-    return left.rawDate.compare(right.rawDate) == NSComparisonResult.OrderedAscending
+    return left.rawDate.compare(right.rawDate) == ComparisonResult.orderedAscending
 }
 
 public func >(left: TimeLord, right: TimeLord) -> Bool {
-    return left.rawDate.compare(right.rawDate) == NSComparisonResult.OrderedDescending
+    return left.rawDate.compare(right.rawDate) == ComparisonResult.orderedDescending
 }
 
 public func <=(left: TimeLord, right: TimeLord) -> Bool {

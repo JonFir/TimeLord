@@ -49,22 +49,22 @@ class TimeLordTests: XCTestCase {
     }
     
     func testInitFromNSDate(){
-        let nsDate = NSDate()
+        let nsDate = Date()
         let tmDate = TimeLord(date: nsDate)
         XCTAssertEqual(nsDate, tmDate.rawDate, "nsdate should equal")
-        let dateformater = NSDateFormatter()
-        dateformater.timeZone = NSTimeZone(abbreviation: "MSK")
+        let dateformater = DateFormatter()
+        dateformater.timeZone = TimeZone(abbreviation: "MSK")
         dateformater.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let tmDateMSK = TimeLord(date: nsDate, timeZone: NSTimeZone(abbreviation: "MSK"))
-        let nsDateMSK = dateformater.stringFromDate(nsDate)
+        let tmDateMSK = TimeLord(date: nsDate, timeZone: TimeZone(abbreviation: "MSK"))
+        let nsDateMSK = dateformater.string(from: nsDate)
         XCTAssertEqual(tmDateMSK.toString(), nsDateMSK, "nsdate should equal")
     }
     
     func testInitFromDateUnit(){
-        let tm1 = TimeLord(year: 2016, month: 01, day: 08, hour: 14, minute: 25, second: 00, timeZone: NSTimeZone(abbreviation: "KRAT"))
+        let tm1 = TimeLord(year: 2016, month: 01, day: 08, hour: 14, minute: 25, second: 00, timeZone: TimeZone(abbreviation: "KRAT"))
         XCTAssertEqual(tm1.toString(), "2016-01-08 14:25:00")
         
-        let tm2 = TimeLord(year: 2016, month: 01, day: 08, hour: 10, minute: 25, second: 00, timeZone: NSTimeZone(abbreviation: "MSK"))
+        let tm2 = TimeLord(year: 2016, month: 01, day: 08, hour: 10, minute: 25, second: 00, timeZone: TimeZone(abbreviation: "MSK"))
         XCTAssertEqual(tm2.toString(), "2016-01-08 10:25:00")
         XCTAssertEqual(tm1.rawDate, tm2.rawDate)
         
@@ -74,12 +74,12 @@ class TimeLordTests: XCTestCase {
     }
     
     func testInitFromString(){
-        let dateformater = NSDateFormatter()
+        let dateformater = DateFormatter()
         dateformater.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nsDate = dateformater.dateFromString("2016-01-08 13:38:00")
+        let nsDate = dateformater.date(from: "2016-01-08 13:38:00")
         let tmDateInDefaultFormat = TimeLord(date: "2016-01-08 13:38:00")
         let tmDateInCustomFormat = TimeLord(date: "2016-01-08 13:38:00", inFormat: "yyyy-MM-dd HH:mm:ss")
-        let tmDateInCustomFormatAndTimeZone = TimeLord(date: "2016-01-08 09:38:00", inFormat: "yyyy-MM-dd HH:mm:ss", timeZone: NSTimeZone(abbreviation: "MSK"))
+        let tmDateInCustomFormatAndTimeZone = TimeLord(date: "2016-01-08 09:38:00", inFormat: "yyyy-MM-dd HH:mm:ss", timeZone: TimeZone(abbreviation: "MSK"))
         XCTAssertEqual(nsDate, tmDateInDefaultFormat!.rawDate, "date should equal")
         XCTAssertEqual(nsDate, tmDateInCustomFormat!.rawDate, "date should equal")
         XCTAssertEqual(nsDate, tmDateInCustomFormatAndTimeZone!.rawDate, "date should equal")
@@ -87,53 +87,53 @@ class TimeLordTests: XCTestCase {
     
     func testIniTimeIntervalSince1970(){
         let tm = TimeLord(timeIntervalSince1970: 1452243489)
-        let ns = NSDate(timeIntervalSince1970: 1452243489)
+        let ns = Date(timeIntervalSince1970: 1452243489)
         XCTAssertEqual(tm.rawDate, ns)
     }
     
     func testInitTimeIntervalSinceNow(){
         let tm = TimeLord(timeIntervalSinceNow: 1452243489)
-        let ns = NSDate(timeIntervalSinceNow: 1452243489)
-        let dateformater = NSDateFormatter()
+        let ns = Date(timeIntervalSinceNow: 1452243489)
+        let dateformater = DateFormatter()
         dateformater.dateFormat = "yyyy-MM-dd HH:mm"
-        let nsString = dateformater.stringFromDate(ns)
+        let nsString = dateformater.string(from: ns)
         let tmString = tm.toStringInFormat("yyyy-MM-dd HH:mm")
         XCTAssertEqual(nsString, tmString)
     }
     
     func testInitTimeIntervalSinceDate(){
-        let date = NSDate()
+        let date = Date()
         let tm = TimeLord(timeInterval: 1452243489, sinceDate: date)
-        let ns = NSDate(timeInterval: 1452243489, sinceDate: date)
+        let ns = Date(timeInterval: 1452243489, since: date)
         XCTAssertEqual(tm.rawDate, ns)
     }
     
     func testInitTimeIntervalSinceReferenceDate(){
         let tm = TimeLord(timeIntervalSinceReferenceDate: 1452243489)
-        let ns = NSDate(timeIntervalSinceReferenceDate: 1452243489)
+        let ns = Date(timeIntervalSinceReferenceDate: 1452243489)
         XCTAssertEqual(tm.rawDate, ns)
     }
     
     func testInitFormKeyWord(){
-        let nsNow = NSDate()
-        let tmNow = TimeLord(keyWord: .Now)
-        let dateformater = NSDateFormatter()
+        let nsNow = Date()
+        let tmNow = TimeLord(keyWord: .now)
+        let dateformater = DateFormatter()
         dateformater.dateFormat = "yyyy-MM-dd HH:mm"
-        let nsString = dateformater.stringFromDate(nsNow)
+        let nsString = dateformater.string(from: nsNow)
         let tmString = tmNow.toStringInFormat("yyyy-MM-dd HH:mm")
         XCTAssertEqual(nsString, tmString)
         
         
-        let tmToday = TimeLord(keyWord: .Today)
-        let nsToday = NSCalendar.currentCalendar().startOfDayForDate(NSDate())
+        let tmToday = TimeLord(keyWord: .today)
+        let nsToday = Calendar.current.startOfDay(for: Date())
         XCTAssertEqual(nsToday, tmToday.rawDate)
         
-        let tmTomorrow = TimeLord(keyWord: .Tomorrow)
-        let nsTomorrow = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: nsToday, options: [])
+        let tmTomorrow = TimeLord(keyWord: .tomorrow)
+        let nsTomorrow = (Calendar.current as NSCalendar).date(byAdding: NSCalendar.Unit.day, value: 1, to: nsToday, options: [])
         XCTAssertEqual(nsTomorrow, tmTomorrow.rawDate)
         
-        let tmYesterday = TimeLord(keyWord: .Yesterday)
-        let nsYesterday = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: -1, toDate: nsToday, options: [])
+        let tmYesterday = TimeLord(keyWord: .yesterday)
+        let nsYesterday = (Calendar.current as NSCalendar).date(byAdding: NSCalendar.Unit.day, value: -1, to: nsToday, options: [])
         XCTAssertEqual(nsYesterday, tmYesterday.rawDate)
     }
     
@@ -145,7 +145,7 @@ class TimeLordTests: XCTestCase {
     func testToStringInFormat(){
         let tm = TimeLord(year: 2016, month: 01, day: 08, hour: 23, minute: 00, second: 00)
         XCTAssertEqual(tm.toStringInFormat("yyyy-MM-dd HH:mm:ss"), "2016-01-08 23:00:00")
-        XCTAssertEqual(tm.toStringInFormat("yyyy-MM-dd HH:mm:ss", inTimeZone: NSTimeZone(abbreviation: "MSK")), "2016-01-08 19:00:00")
+        XCTAssertEqual(tm.toStringInFormat("yyyy-MM-dd HH:mm:ss", inTimeZone: TimeZone(abbreviation: "MSK")), "2016-01-08 19:00:00")
     }
     
     func testToFormattedDateString(){
@@ -165,7 +165,7 @@ class TimeLordTests: XCTestCase {
     
     func testToDayDateTimeString(){
         let tm = TimeLord(year: 2016, month: 01, day: 08, hour: 23, minute: 25, second: 40)
-        XCTAssertEqual(tm.toDayDateTimeString(), "пт, янв. 8, 2016 11:25 PM")
+        XCTAssertEqual(tm.toDayDateTimeString(), "пт, янв. 8, 2016 11:25 ПП")
     }
     
     func testToAtomString(){
@@ -277,34 +277,34 @@ class TimeLordTests: XCTestCase {
     }
     
     func testIsYesterday(){
-        let nsYesterday = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: [])
+        let nsYesterday = (Calendar.current as NSCalendar).date(byAdding: .day, value: -1, to: Date(), options: [])
         let tmYesterday = TimeLord(date: nsYesterday!)
-        let tmNow = TimeLord(keyWord: .Now)
+        let tmNow = TimeLord(keyWord: .now)
         XCTAssertTrue(tmYesterday.isYesterday())
         XCTAssertFalse(tmNow.isYesterday())
     }
     
     func testIsToday(){
-        let nsTommorow = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: NSDate(), options: [])
+        let nsTommorow = (Calendar.current as NSCalendar).date(byAdding: .day, value: 1, to: Date(), options: [])
         let tmTommorow = TimeLord(date: nsTommorow!)
-        let tmNow = TimeLord(keyWord: .Now)
+        let tmNow = TimeLord(keyWord: .now)
         XCTAssertTrue(tmNow.isToday())
         XCTAssertFalse(tmTommorow.isToday())
     }
     
     func testIsTomorrow(){
-        let nsTommorow = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: NSDate(), options: [])
+        let nsTommorow = (Calendar.current as NSCalendar).date(byAdding: .day, value: 1, to: Date(), options: [])
         let tmTommorow = TimeLord(date: nsTommorow!)
-        let tmNow = TimeLord(keyWord: .Now)
+        let tmNow = TimeLord(keyWord: .now)
         XCTAssertTrue(tmTommorow.isTomorrow())
         XCTAssertFalse(tmNow.isTomorrow())
     }
     
     func testIsFuture(){
-        let nsTommorow = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: NSDate(), options: [])
+        let nsTommorow = (Calendar.current as NSCalendar).date(byAdding: .day, value: 1, to: Date(), options: [])
         let tmTommorow = TimeLord(date: nsTommorow!)
         
-        let nsYesterday = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: [])
+        let nsYesterday = (Calendar.current as NSCalendar).date(byAdding: .day, value: -1, to: Date(), options: [])
         let tmYesterday = TimeLord(date: nsYesterday!)
         
         XCTAssertTrue(tmTommorow.isFuture())
@@ -312,10 +312,10 @@ class TimeLordTests: XCTestCase {
     }
     
     func testIsPast(){
-        let nsTommorow = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: NSDate(), options: [])
+        let nsTommorow = (Calendar.current as NSCalendar).date(byAdding: .day, value: 1, to: Date(), options: [])
         let tmTommorow = TimeLord(date: nsTommorow!)
         
-        let nsYesterday = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: [])
+        let nsYesterday = (Calendar.current as NSCalendar).date(byAdding: .day, value: -1, to: Date(), options: [])
         let tmYesterday = TimeLord(date: nsYesterday!)
         
         XCTAssertFalse(tmTommorow.isPast())
@@ -542,70 +542,70 @@ class TimeLordTests: XCTestCase {
     
     func testInTimeZone(){
         let tm1 = TimeLord(year: 2016, month: 01, day: 08, hour: 23, minute: 25, second: 11)
-        let tm2 = tm1.inTimeZone(NSTimeZone(abbreviation: "MSK")!)
+        let tm2 = tm1.inTimeZone(TimeZone(abbreviation: "MSK")!)
         XCTAssertEqual(tm2.toString(), "2016-01-08 19:25:11")
     }
     
     func testStartOfDay(){
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nsDate = dateFormatter.dateFromString("2016-01-10 00:00:00")
+        let nsDate = dateFormatter.date(from: "2016-01-10 00:00:00")
         let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).startOfDay()
         XCTAssertEqual(nsDate, tmDate.rawDate)
     }
     
     func testEndOfDay(){
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nsDate = dateFormatter.dateFromString("2016-01-10 23:59:59")
+        let nsDate = dateFormatter.date(from: "2016-01-10 23:59:59")
         let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).endOfDay()
         XCTAssertEqual(nsDate, tmDate.rawDate)
     }
     
     func testStartOfMonth(){
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nsDate = dateFormatter.dateFromString("2016-01-01 00:00:00")
+        let nsDate = dateFormatter.date(from: "2016-01-01 00:00:00")
         let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).startOfMonth()
         XCTAssertEqual(nsDate, tmDate.rawDate)
     }
     
     func testEndOfMonth(){
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nsDate = dateFormatter.dateFromString("2016-01-31 23:59:59")
+        let nsDate = dateFormatter.date(from: "2016-01-31 23:59:59")
         let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).endOfMonth()
         XCTAssertEqual(nsDate, tmDate.rawDate)
     }
     
     func testStartOfYear(){
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nsDate = dateFormatter.dateFromString("2016-01-01 00:00:00")
+        let nsDate = dateFormatter.date(from: "2016-01-01 00:00:00")
         let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).startOfYear()
         XCTAssertEqual(nsDate, tmDate.rawDate)
     }
     
     func testEndOfYear(){
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nsDate = dateFormatter.dateFromString("2016-12-31 23:59:59")
+        let nsDate = dateFormatter.date(from: "2016-12-31 23:59:59")
         let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).endOfYear()
         XCTAssertEqual(nsDate, tmDate.rawDate)
     }
     
     func testNext(){
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nsDate = dateFormatter.dateFromString("2016-01-11 22:11:11")
+        let nsDate = dateFormatter.date(from: "2016-01-11 22:11:11")
         let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).next()
         XCTAssertEqual(nsDate, tmDate.rawDate)
     }
 
     func testPrevious(){
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nsDate = dateFormatter.dateFromString("2016-01-09 22:11:11")
+        let nsDate = dateFormatter.date(from: "2016-01-09 22:11:11")
         let tmDate = TimeLord(year: 2016, month: 01, day: 10, hour: 22, minute: 11, second: 11).previous()
         XCTAssertEqual(nsDate, tmDate.rawDate)
     }
@@ -643,9 +643,9 @@ class TimeLordTests: XCTestCase {
     }
     
     func testHashable(){
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let nsDate = dateFormatter.dateFromString("2016-01-09 22:11:11")
+        let nsDate = dateFormatter.date(from: "2016-01-09 22:11:11")
         let tmDate = TimeLord(year: 2016, month: 01, day: 09, hour: 22, minute: 11, second: 11)
         XCTAssertEqual(nsDate!.hashValue, tmDate.hashValue)
     }
@@ -656,7 +656,7 @@ class TimeLordTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
